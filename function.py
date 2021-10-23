@@ -49,9 +49,19 @@ def quiz(id):
         return False
     
 
-
-
-
+def main():
+    try:
+        print("1:範囲指定")
+        mode = int(input())
+        if mode == 1:
+            print("範囲を指定してください")
+            start = input("開始No")
+            finish = input("終了No")
+    except ValueError:
+        print("数値を入力してください")
+        main(id)
 
         
     
+if __name__ == "__main__":
+    main()
