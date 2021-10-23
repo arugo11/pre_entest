@@ -47,11 +47,6 @@ def quiz(id):
     else:
         print("False(´・ω・｀)")
         return False
-
-
-        
-
-quiz(0)
     
 
 
