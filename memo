@@ -1,0 +1,15 @@
+       for i in range(1,1901):
+            if i == id:
+                with open(path_r) as f:
+                    reader = csv.reader(f)
+                    count_ans = [row for row in reader]
+                    if count_ans == "":#no record
+                        write = 0
+                    else:
+                        write = count_ans
+                    writer = csv.writer(f)
+                    writer.writerow([i , write])
+
+
+main:指定したIDの二番目の引数に+1
+[id, count , date[]]
