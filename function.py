@@ -1,11 +1,15 @@
 from os import O_CREAT, waitpid
 import random
+import datetime
+import csv
 
 
 path_f = "data/dic_f.csv"
 path_q = "data/dic_q.csv"
+path_r = "data/record.csv"
 word_list = []
 questions = []
+records = []
 
 with open(path_f) as f:
     temp = f.read()
@@ -48,20 +52,11 @@ def quiz(id):
         print("False(´・ω・｀)")
         return False
     
-
-def main():
-    try:
-        print("1:範囲指定")
-        mode = int(input())
-        if mode == 1:
-            print("範囲を指定してください")
-            start = input("開始No")
-            finish = input("終了No")
-    except ValueError:
-        print("数値を入力してください")
-        main(id)
-
-        
-    
-if __name__ == "__main__":
-    main()
+def record(id , judge):
+    with open(path_r , "w") as f:
+        reader = csv.reader(f)
+        records = [row for row in reader]
+        for i in range(1 , 1901):
+            pass
+            
+                
