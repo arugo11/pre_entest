@@ -34,7 +34,7 @@ def select(id):
             choice.insert(i,str(i) + ":" +questions[random.randint(0,1898)])
     return [choice , ans_pos]
 
-def quiz(id):
+def quiz(id):#問題を表示→正誤のみ返す
     #問題文の表示
     temp_select = select(id)#selects[0]→選択肢(str) , 答えNo
     print(word_list[id][1])
@@ -53,10 +53,32 @@ def quiz(id):
         return False
     
 def record(id , judge):
-    with open(path_r , "w") as f:
-        reader = csv.reader(f)
-        records = [row for row in reader]
-        for i in range(1 , 1901):
-            pass
+
+        with open(path_r) as g:
+            reader = csv.reader(g)
+            l = [row for row in reader]#前回までの記録の参照完了
+            count = int(l[id][1])
+            w_count = int(l[id][2])
+            day = list(l[id][3])
+
+        with open(path_r , "w") as f:
+            count += 1
+            if not judge:w_count += 1
+            today = str(datetime.date.today())
+            day.append(str(today))
+            for i in l:
+                writer = csv.writer(f)
+                if i == id:
+                    writer.writerow(i+1 , count , w_count , day)
+                writer.writerow([l])
+            
+
+record(1 , False)
+
+            
+
+
+
+
             
                 
