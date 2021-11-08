@@ -75,7 +75,8 @@ def record(id , judge):
 
         writer = csv.writer(g)
         writer.writerows(l)
-        return l
+        a = l[1899][3]#spritしてstr->list型に変換する
+        return 
 
 
 
