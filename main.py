@@ -5,6 +5,7 @@ def main():
         print("0:設定 1:範囲指定")
         mode = int(input())
         if mode == 1:
+         
             print("範囲を指定してください")
             start = int(input("開始No"))
             finish = int(input("終了No"))
@@ -19,4 +20,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+
+    print(record(1900,False))
+
+    

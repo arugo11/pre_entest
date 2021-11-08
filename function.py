@@ -6,7 +6,7 @@ import csv
 
 path_f = "data/dic_f.csv"
 path_q = "data/dic_q.csv"
-path_r = "data/record.csv"
+path_r = "/Users/arugo/Documents/entest/entest/data/record.csv"
 word_list = []
 questions = []
 records = []
@@ -53,27 +53,33 @@ def quiz(id):#問題を表示→正誤のみ返す
         return False
     
 def record(id , judge):
+    with open(path_r) as f:
+        reader = csv.reader(f)
+        l = [row for row in reader]
 
-        with open(path_r) as g:
-            reader = csv.reader(g)
-            l = [row for row in reader]#前回までの記録の参照完了
-            count = int(l[id][1])
-            w_count = int(l[id][2])
-            day = list(l[id][3])
+    with open(path_r , "w") as g:
+        id = int(id) 
+        count = int(l[id-1][1]) + 1
+        
+        wrong_count = int(l[id-1][2])
 
-        with open(path_r , "w") as f:
-            count += 1
-            if not judge:w_count += 1
+        date = (l[id-1][3]).split(",")
+        if judge == False:
+            wrong_count += 1
             today = str(datetime.date.today())
-            day.append(str(today))
-            for i in l:
-                writer = csv.writer(f)
-                if i == id:
-                    writer.writerow(i+1 , count , w_count , day)
-                writer.writerow([l])
-            
+            today.replace("-","")
+            date.append(today)#1番目から追加開始
+        
+        result = [id , count , wrong_count , date]
+        l[id - 1] = result
 
-record(1 , False)
+        writer = csv.writer(g)
+        writer.writerows(l)
+        return l
+
+
+
+        
 
             
 
