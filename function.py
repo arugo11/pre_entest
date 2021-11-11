@@ -1,6 +1,6 @@
-from os import O_CREAT, waitpid
+from os import O_CREAT, replace, waitpid
 import random
-import datetime
+import datetime as dt
 import csv
 
 
@@ -58,25 +58,33 @@ def record(id , judge):
         l = [row for row in reader]
 
     with open(path_r , "w") as g:
-        id = int(id) 
-        count = int(l[id-1][1]) + 1
-        
-        wrong_count = int(l[id-1][2])
-
-        date = (l[id-1][3]).split(",")
-        if judge == False:
+        id = int(id) - 1
+        count = int(l[id][1]) + 1
+        wrong_count = int(l[id][2])
+        #数字加算
+        if not judge:
             wrong_count += 1
-            today = str(datetime.date.today())
-            today.replace("-","")
-            date.append(today)#1番目から追加開始
+
+        result = [id + 1, count , wrong_count]
+        up_to_date = l[id][3:]#すべての日付
+        up_to_date = [int(i) for i in up_to_date]
+
+
+#日付処理
+        today = int((str(dt.date.today())).replace("-" , ""))
+        if judge:
+            pass
+        else:
+            up_to_date.append(today)
         
-        result = [id , count , wrong_count , date]
-        l[id - 1] = result
+        result += up_to_date
+
+        l[id]  = result
 
         writer = csv.writer(g)
         writer.writerows(l)
-        a = l[1899][3]#spritしてstr->list型に変換する
-        return 
+        
+
 
 
 

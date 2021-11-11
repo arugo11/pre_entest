@@ -21,6 +21,6 @@ def main():
 
 if __name__ == "__main__":
 
-    print(record(1900,False))
+    print(record(1,False))
 
     
